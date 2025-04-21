@@ -1,18 +1,21 @@
 package io.darrenleung.springboot_restapi_demo.controllers;
 
 import io.darrenleung.springboot_restapi_demo.dtos.BookCreateDTO;
+import io.darrenleung.springboot_restapi_demo.dtos.BookResponseDTO;
 import io.darrenleung.springboot_restapi_demo.models.Book;
 import io.darrenleung.springboot_restapi_demo.services.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping(value = "/api/books", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BookController {
 
     private final BookService bookService;
@@ -22,26 +25,33 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PostMapping
-    public ResponseEntity<Book> createBook(@Valid @RequestBody BookCreateDTO bookDTO) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BookResponseDTO> createBook(@Valid @RequestBody BookCreateDTO bookDTO) {
         Book createdBook = bookService.createBook(bookDTO);
-        return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
+        return new ResponseEntity<>(new BookResponseDTO(createdBook), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks(
+    public ResponseEntity<List<BookResponseDTO>> getAllBooks(
             @RequestParam(required = false) String author,
             @RequestParam(required = false) Boolean published) {
         
+        List<Book> books;
         if (author != null && published != null) {
-            return ResponseEntity.ok(bookService.getBooksByAuthorAndPublishedStatus(author, published));
+            books = bookService.getBooksByAuthorAndPublishedStatus(author, published);
         } else if (author != null) {
-            return ResponseEntity.ok(bookService.getBooksByAuthor(author));
+            books = bookService.getBooksByAuthor(author);
         } else if (published != null) {
-            return ResponseEntity.ok(bookService.getBooksByPublishedStatus(published));
+            books = bookService.getBooksByPublishedStatus(published);
         } else {
-            return ResponseEntity.ok(bookService.getAllBooks());
+            books = bookService.getAllBooks();
         }
+
+        List<BookResponseDTO> responseDTOs = books.stream()
+                .map(BookResponseDTO::new)
+                .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(responseDTOs);
     }
 
     @DeleteMapping("/{id}")
