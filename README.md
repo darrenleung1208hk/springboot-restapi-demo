@@ -1,4 +1,5 @@
 # Spring Boot REST API Demo
+[![CI Pipeline](https://github.com/darrenleung1208hk/springboot-restapi-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/darrenleung1208hk/springboot-restapi-demo/actions/workflows/ci.yml)
 
 A RESTful API demo built with Spring Boot for managing books. This application demonstrates best practices in building REST APIs with validation, error handling, and proper response formatting.
 
@@ -111,12 +112,30 @@ Error response format:
 {
     "timestamp": "2024-04-21T14:30:00.000+00:00",
     "status": 400,
-    "errors": [
-        "Title is required",
-        "Author must contain only alphanumeric characters and spaces"
-    ]
+    "error": "Validation Error",
+    "message": "title: Title is required; author: Author must contain only alphanumeric characters and spaces",
+    "validationErrors": [
+        {
+            "field": "title",
+            "message": "Title is required"
+        },
+        {
+            "field": "author",
+            "message": "Author must contain only alphanumeric characters and spaces"
+        }
+    ],
+    "path": "/api/books"
 }
 ```
+
+### Screenshots for the API Calls
+![Screenshot 2025-04-22 031229](https://github.com/user-attachments/assets/cef607ca-1b26-4fb3-bade-f989682b089e)
+![Screenshot 2025-04-22 031300](https://github.com/user-attachments/assets/4452538f-b8d7-412c-8cce-d8d04bbd5d11)
+![Screenshot 2025-04-22 031310](https://github.com/user-attachments/assets/67e6364d-1630-45fb-99fd-342d580ff647)
+![Screenshot 2025-04-22 031318](https://github.com/user-attachments/assets/7e10bb17-557b-4117-a361-9fc01777e30b)
+![Screenshot 2025-04-22 031327](https://github.com/user-attachments/assets/1530606c-3d2f-464b-b2f9-949101de19d2)
+![Screenshot 2025-04-22 031201](https://github.com/user-attachments/assets/786af9c9-20b2-4dbb-ad16-72917f79eff7)
+
 
 ## Running Tests
 
