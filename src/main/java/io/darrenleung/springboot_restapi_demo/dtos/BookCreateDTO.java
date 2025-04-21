@@ -1,6 +1,7 @@
 package io.darrenleung.springboot_restapi_demo.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,6 +19,7 @@ public class BookCreateDTO {
     
     @NotNull(message = "Published status is required")
     @JsonProperty("published")
+    @JsonDeserialize(using = BooleanDeserializer.class)
     private Boolean published;
 
     // Getters and Setters
