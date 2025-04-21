@@ -1,7 +1,6 @@
 package io.darrenleung.springboot_restapi_demo.dtos;
 
 import jakarta.validation.constraints.Pattern;
-import java.time.LocalDate;
 
 public class BookCreateDTO {
     
@@ -11,7 +10,7 @@ public class BookCreateDTO {
     @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Author must contain only alphanumeric characters and spaces")
     private String author;
     
-    private LocalDate published;
+    private boolean published;
 
     // Getters and Setters
     public String getTitle() {
@@ -30,11 +29,11 @@ public class BookCreateDTO {
         this.author = author;
     }
 
-    public LocalDate getPublished() {
+    public boolean isPublished() {
         return published;
     }
 
-    public void setPublished(LocalDate published) {
+    public void setPublished(boolean published) {
         this.published = published;
     }
 } 

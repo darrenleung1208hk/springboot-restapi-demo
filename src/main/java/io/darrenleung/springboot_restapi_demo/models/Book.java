@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Pattern;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "books")
@@ -22,14 +21,14 @@ public class Book {
     @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Author must contain only alphanumeric characters and spaces")
     private String author;
     
-    private LocalDate published;
+    private boolean published;
 
     // Default constructor
     public Book() {
     }
 
     // Constructor with parameters
-    public Book(String title, String author, LocalDate published) {
+    public Book(String title, String author, boolean published) {
         this.title = title;
         this.author = author;
         this.published = published;
@@ -60,11 +59,11 @@ public class Book {
         this.author = author;
     }
 
-    public LocalDate getPublished() {
+    public boolean isPublished() {
         return published;
     }
 
-    public void setPublished(LocalDate published) {
+    public void setPublished(boolean published) {
         this.published = published;
     }
 } 

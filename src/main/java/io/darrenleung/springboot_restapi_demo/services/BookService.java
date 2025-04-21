@@ -21,7 +21,7 @@ public class BookService {
         Book book = new Book();
         book.setTitle(bookDTO.getTitle());
         book.setAuthor(bookDTO.getAuthor());
-        book.setPublished(bookDTO.getPublished());
+        book.setPublished(bookDTO.isPublished());
         
         return bookRepository.save(book);
     }
