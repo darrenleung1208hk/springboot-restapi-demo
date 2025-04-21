@@ -6,6 +6,8 @@ import io.darrenleung.springboot_restapi_demo.repositories.BookRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
@@ -41,5 +43,12 @@ public class BookService {
 
     public List<Book> getBooksByAuthorAndPublishedStatus(String author, boolean published) {
         return bookRepository.findByAuthorAndPublished(author, published);
+    }
+
+    public void deleteBook(Long id) {
+        if (!bookRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found with id: " + id);
+        }
+        bookRepository.deleteById(id);
     }
 } 
