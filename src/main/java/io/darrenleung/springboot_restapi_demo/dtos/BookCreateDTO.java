@@ -1,19 +1,8 @@
-package io.darrenleung.springboot_restapi_demo.models;
+package io.darrenleung.springboot_restapi_demo.dtos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "books")
-public class Book {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class BookCreateDTO {
     
     @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Title must contain only alphanumeric characters and spaces")
     private String title;
@@ -23,26 +12,7 @@ public class Book {
     
     private boolean published;
 
-    // Default constructor
-    public Book() {
-    }
-
-    // Constructor with parameters
-    public Book(String title, String author, boolean published) {
-        this.title = title;
-        this.author = author;
-        this.published = published;
-    }
-
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
