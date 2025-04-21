@@ -17,7 +17,7 @@ public class BookCreateDTO {
     @JsonProperty("author")
     private String author;
     
-    @NotNull(message = "Published status is required")
+    @NotNull(message = "Published status is required and must be a boolean value (true or false)")
     @JsonProperty("published")
     @JsonDeserialize(using = BooleanDeserializer.class)
     private Boolean published;

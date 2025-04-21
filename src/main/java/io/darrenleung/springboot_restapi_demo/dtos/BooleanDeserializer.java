@@ -13,6 +13,7 @@ public class BooleanDeserializer extends JsonDeserializer<Boolean> {
         if (p.getCurrentToken().isBoolean()) {
             return p.getBooleanValue();
         }
-        throw new InvalidFormatException(p, "Published status must be a boolean value (true or false)", p.getText(), Boolean.class);
+        // Instead of throwing an exception, return null to let Bean Validation handle it
+        return null;
     }
 } 
