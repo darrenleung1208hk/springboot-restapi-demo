@@ -1,9 +1,8 @@
-package io.darrenleung.springboot_restapi_demo.dtos;
+package io.darrenleung.springboot_restapi_demo.serialization;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import java.io.IOException;
 
 public class BooleanDeserializer extends JsonDeserializer<Boolean> {
